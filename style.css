@@ -86,14 +86,14 @@ header {
 #left-panel {
     background-color: #f8f9fa;
     padding: 15px;
-    padding-left: 25px;
+    padding-left: 30px;
     border-right: 1px solid #dee2e6;
 }
 
 #right-panel {
     background-color: #f8f9fa;
     padding: 15px;
-    padding-right: 25px;
+    padding-right: 30px;
     border-left: 1px solid #dee2e6;
 }
 
