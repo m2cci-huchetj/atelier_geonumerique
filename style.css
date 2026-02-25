@@ -1,0 +1,276 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #2c3e50;
+    color: white;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+
+/* --- Info Button Style --- */
+.info-btn {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-left: 10px;
+    font-weight: bold;
+    font-family: serif;
+    font-style: italic;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.info-btn:hover {
+    background-color: white;
+    color: #2c3e50;
+}
+
+/* --- Modal Styles --- */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; 
+    z-index: 20000; /* High z-index to cover map */
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+    backdrop-filter: blur(2px);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5vh auto; 
+    padding: 30px;
+    border: 1px solid #888;
+    width: 50%; 
+    max-width: 800px;
+    min-width: 300px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    position: relative;
+    max-height: 90vh; 
+    overflow-y: auto; 
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/* --- Panels --- */
+#left-panel {
+    background-color: #f8f9fa;
+    padding: 15px;
+    padding-left: 25px;
+    border-right: 1px solid #dee2e6;
+}
+
+#right-panel {
+    background-color: #f8f9fa;
+    padding: 15px;
+    padding-right: 25px;
+    border-left: 1px solid #dee2e6;
+}
+
+#main-content {
+    flex-direction: column;
+    padding: 15px;
+    position: relative;
+}
+
+#map { 
+    height: 100%; 
+    position: relative;
+    overflow: hidden;
+}
+
+/* --- Leaflet Control Adjustments --- */
+/* Push the layer control down to make room for the fullscreen button */
+.leaflet-top.leaflet-right {
+    margin-top: 50px;
+}
+
+footer {
+    background-color: #34495e;
+    color: white;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+header p{
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 0;
+}
+
+.region-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.region-btn:hover {
+    background-color: #2980b9;
+}
+
+.fullscreen-btn {
+    position: absolute;
+    top: 25px; /* Moved to top */
+    right: 25px; /* Aligned with standard leaflet margin */
+    z-index: 1000;
+    background-color: rgba(255,255,255,0.9);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.fullscreen-btn:hover {
+    background-color: white;
+}
+
+.info-popup {
+    max-width: 300px;
+}
+
+.info-popup h4 {
+    margin: 0 0 10px 0;
+    color: #2c3e50;
+}
+
+.info-popup table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.info-popup td {
+    padding: 4px 8px;
+    border-bottom: 1px solid #eee;
+}
+
+.info-popup td:first-child {
+    font-weight: bold;
+    width: 60%;
+}
+
+/* Split line styles */
+#split-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: #ff0000;
+    cursor: col-resize;
+    z-index: 1000;
+    display: none;
+    pointer-events: auto;
+}
+
+#split-line::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -8px;
+    right: -8px;
+    bottom: 0;
+}
+
+#split-line::after {
+    content: '↔';
+    position: absolute;
+    top: 50%;
+    left: -12px;
+    width: 28px;
+    height: 28px;
+    background-color: #ff0000;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    transform: translateY(-50%);
+}
+
+#ndvi-options{
+    display: none;
+    margin-top: 15px;
+}
+
+label{
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Opacity slider styles */
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    background: #ddd;
+    border-radius: 3px;
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #3498db;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: #3498db;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+table,
+td {
+  border: 1px solid black;
+}
+tbody tr:nth-child(odd) {
+  background: #ffffff;
+}
+tbody tr:nth-child(even) {
+  background: #f4f4f4;
+}
