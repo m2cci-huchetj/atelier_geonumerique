@@ -496,11 +496,18 @@ function donneesFiltrer(coucheActive, labelFiltre){
         document.getElementById("filtreActif").innerHTML = labelFiltre;
         colData = referenceDonnees[coucheActive][2];
         //https://stackoverflow.com/questions/53250709/openlayers-create-layers-from-geojson-by-property
-        if (coucheActive === "CoucheLCZ"){
+        if (coucheActive === "coucheLCZ"){
             filteredData = {
                 "type": "FeatureCollection",
                 "features": geojsonFeature.features.filter(function(features){
                     return (features.properties[colData] == labelFiltre);
+                })
+            };
+        }else if (coucheActive === "coucheICU"){
+            filteredData = {
+                "type": "FeatureCollection",
+                "features": geojsonFeature.features.filter(function(features){
+                    return (features.properties[colData] == Number(labelFiltre.substring(4)));
                 })
             };
         } else {
