@@ -482,6 +482,7 @@ function donneesFiltrer(coucheActive, labelFiltre){
         "couchePermeable" : [affichePermeable, stylePermeable, "pct_permeable"],
         "coucheHauteurMoy" : [afficheHautMoy, styleHautMoy, "hauteur_moy_batiment"],
         "coucheRugosite" : [afficheRugosite, styleRugosite, "hauteur_moy_rugosite"],
+        "coucheMoySVF" : [afficheMoySVF, styleMoySVF, "moy_svf"],
         "coucheVegetation" : [afficheVegetation, styleVegetation, "pct_vegetation"],
         "coucheICU" : [afficheICU, styleICU, "icu_index"]
     };
@@ -496,21 +497,14 @@ function donneesFiltrer(coucheActive, labelFiltre){
         document.getElementById("filtreActif").innerHTML = labelFiltre;
         colData = referenceDonnees[coucheActive][2];
         //https://stackoverflow.com/questions/53250709/openlayers-create-layers-from-geojson-by-property
-        if (coucheActive === "coucheLCZ"){
+        if (coucheActive === "coucheLCZ" || coucheActive === "coucheICU"){
             filteredData = {
                 "type": "FeatureCollection",
                 "features": geojsonFeature.features.filter(function(features){
                     return (features.properties[colData] == labelFiltre);
                 })
             };
-        }else if (coucheActive === "coucheICU"){
-            filteredData = {
-                "type": "FeatureCollection",
-                "features": geojsonFeature.features.filter(function(features){
-                    return (features.properties[colData] == Number(labelFiltre.substring(4)));
-                })
-            };
-        } else {
+        }else {
             // On filtre les indicateurs par rapport au minimum et au maximum de la barre du graphique sélectionnée
             filteredData = {
                 "type": "FeatureCollection",
@@ -1029,7 +1023,7 @@ function afficheICU(){
     //On bloque le bouton
     ableButton("coucheICU");
     //On créer le graphique
-    creerGraphiqueBarSeuil(geojsonFeature.features.map(f => f.properties.icu_index), [1, 2, 3, 4, 5], ['#2166AC', '#92C5DE', '#F7F7F7', '#F4A582', '#B2182B']);
+    creerGraphiqueBar(geojsonFeature.features.map(f => f.properties.icu_index), ['#2166AC', '#92C5DE', '#F7F7F7', '#F4A582', '#B2182B']);
     //On affiche la couche
     geojsonICU = L.geoJSON(geojsonFeature, {
         style: styleICU,
